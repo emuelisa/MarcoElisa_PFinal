@@ -1,0 +1,576 @@
+@font-face {
+    font-family: 'Instrument Serif';
+    src: url('../src/fonts/InstrumentSerif-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Instrument Serif';
+    src: url('../src/fonts/InstrumentSerif-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../src/fonts/Inter-VariableFont_opsz\,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../src/fonts/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+}
+
+
+::-webkit-scrollbar {
+    display: none; /* Oculta la barra de desplazamiento en navegadores Webkit (Chrome, Safari) */
+}
+  
+  /* En Firefox, puedes usar esto */
+html {
+    scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+    -ms-overflow-style: none; /* Oculta la barra de desplazamiento en IE/Edge */
+}
+
+:root {
+    --color-1: #777E79;
+    --color-2: #D4D8D0;
+    --color-3: #F9F5F0;
+}
+
+h1 {
+    font-family: 'Instrument Serif', sans-serif;
+    font-size: 4rem;
+}
+
+h2 {
+    font-family: 'Instrument Serif', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 0;
+}
+
+
+h3 {
+    font-family: 'Instrument Serif', sans-serif;
+    font-size: 1.5rem;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+p {
+    font-family: 'Inter', sans-serif; 
+    font-weight: 200;
+}
+
+/* index.html */
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--color-3);
+
+    overflow-x: hidden;
+
+}
+
+
+
+#breathing-experience {
+    height: 100vh;
+    display: flex;
+   
+}
+
+.scrolltelling-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Hace el botón redondo */
+
+    border: none;
+    background-color: var(--color-1);
+    color: var(--color-3);
+
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+/* about.html */
+
+.welcome-screen {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--color-1);
+    color: var(--color-3);
+}
+
+.line {
+    position: absolute;
+    display: block;
+    width: 2px;
+    height: 0px;
+    background-color: var(--color-3);
+    top: 58vh;
+}
+
+/*🔸CRUZ DE CIERRE PARA VOLVER A LA EXPERIENCIA DE RELAJACIÓN */
+
+.close-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+
+    z-index: 9999;
+}
+
+.close-icon .leftright,
+.close-icon .rightleft {
+    height: 4px;
+    width: 50px;
+    position: absolute;
+    margin-top: 24px;
+    background-color: var(--color-1);
+    transition: all .3s ease-in;
+}
+
+.close-icon .leftright {
+    transform: rotate(45deg);
+}
+    
+.close-icon .rightleft {
+    transform: rotate(-45deg);
+}
+
+
+.close-icon:hover .leftright {
+    transform: rotate(-45deg);
+}
+
+.close-icon:hover .rightleft {
+    transform: rotate(45deg);
+}
+
+/*🔸INDICADOR FIXED DE LAS SECCIONES*/
+
+.sticky-text {
+    position: fixed;
+    top: 40%;
+    left: 1.8%;
+    
+    transform: rotate(90deg);
+    transform-origin: left center;
+    font-family: 'Instrument Serif', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-2);
+
+    text-align: center;
+
+    z-index: 100;
+}
+
+/*🔸CONFIGURACIÓN GENERAL DE LAS SECCIONES */
+
+.section {
+    display: flex;
+    flex-direction: column;
+
+    height: 100vh;
+    position: relative;
+    z-index: 1;
+
+    background-color: var(--color-3);
+    color: var(--color-1);
+
+    padding-left: 5rem;
+    padding-right: 2rem;
+}
+
+.section-full { 
+    display: flex;
+    flex-direction: column;
+    
+    height: 100vh;
+    position: relative;
+    z-index: 1;
+
+    background-color: var(--color-3);
+    color: var(--color-1);
+}
+
+.section-content {
+    font-size: 2rem;
+}
+
+/*🔸SECCIÓN 1 - RECONOCIMEINTO DE LA EXPERIENCIA */
+
+.uno {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    color: var(--color-2);
+
+    p {
+        width: 60vw;
+        margin-bottom: 0;
+    }
+    
+}
+/*🔸SECCIÓN 2 - RECONOCIMEINTO DE LA EXPERIENCIA */
+
+.dos {
+    position: relative;
+
+    .section-content {
+        width: 60vw;
+    }
+
+    svg {
+        position: absolute;
+        right: -10%;
+        top: 20%;
+        opacity: 0.3; /* Baja opacidad */
+        width: 70vw;
+        height: auto;
+        z-index: 1;
+    }
+}
+
+/*🔸SECCIÓN 3 - CARRUSEL HORIZONTAL DE SÍNTOMAS*/
+
+.tres {
+    
+    div:first-child {
+        padding-bottom: 50px;
+    }
+}
+
+.carousel-wrap {
+    overflow: hidden;
+    margin-left: 50vh;
+}
+
+.carousel {
+    display: flex;
+    gap: 1rem;
+
+    overflow-x: visible;  
+    scroll-snap-type: x mandatory; 
+    -webkit-overflow-scrolling: touch; 
+}
+
+.carousel-item {
+    cursor: none;
+    
+    position: relative;
+    flex-shrink: 0;  /* Evita que los elementos se hagan pequeños */
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+
+    width: 22vw;
+    height: 50vh;
+
+    border: 1px solid var(--color-1);
+    background-color: var(--color-3);
+    color: var(--color-1);
+    padding: 3rem;
+
+    transition: all 0.4s ease-in;
+}
+
+.item-subtitle {
+    font-size: 1.3rem;
+}
+
+.item-description {
+    display: none; /* Ocultamos la descripción por defecto */
+    opacity: 0;
+    transform: translateY(20px); /* Lo posicionamos un poco debajo */
+    transition: all 0.3s ease-out;
+}
+
+.carousel-item.active {
+    color: var(--color-1);
+    background-color: var(--color-2);
+}
+
+.carousel-item.active .item-description {
+    display: block;
+    opacity: 1;
+    transform: translateY(0); /* Deslizamos hacia arriba */
+}
+
+
+/* Estilo para el círculo que aparece cuando el ratón pasa sobre el item */
+.carousel-item .circle-plus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    opacity: 0;
+    pointer-events: none; 
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/*🔸SECCIÓN 5 - VIDEO A PANTALLA COMPLETA */
+.cinco {
+    color: var(--color-3);
+}
+
+.video-wp {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.noise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../src/media/noise.66962f.png) repeat;
+    opacity: 0.5; 
+    z-index: 2; /* Por encima del video */
+    pointer-events: none; /* Para que el ruido no interfiera con interacciones */
+}
+
+.text-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: absolute;
+    align-self: center;
+    top: 30%;
+    z-index: 6; /* Por encima del video y del ruido */
+    text-align: center;
+}
+
+.enfocate {
+    font-size: 14rem; 
+    font-weight: bold;
+    font-family: 'Instrument Serif', sans-serif;
+    margin: 0;
+
+    filter: blur(15px); /* Inicialmente desenfocado */
+}
+
+.text-overlay .section-content {
+    width: 60vw;
+}
+
+/*🔸SECCIÓN SEIS */
+
+.seis {
+    color: var(--color-1);
+    
+}
+
+.seis .text-overlay p:first-child {
+    font-size: 14rem; 
+    font-weight: bold;
+    font-family: 'Instrument Serif', sans-serif;
+    margin: 0;
+
+}
+
+.breath {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1;
+}
+
+.breath .circle {
+    position: absolute;
+    width: 0px; /* Comienza como un punto pequeño */
+    height: 0px;
+    border-radius: 50%;
+    background: rgba(212, 216, 208, 0.3); /* Azul translúcido */
+    opacity: 0;
+    z-index: 1;
+}
+
+
+/*🔸SECCIÓN SIETE */
+
+.siete {
+    position: relative;
+
+    .section-content {
+        width: 50vw;
+    }
+}
+
+.help-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 25vw;
+    height: 25vw;
+    border-radius: 50%;
+    top: 65%; 
+    left: 75%; 
+    transform: translate(-50%, -50%); 
+    border: 1px solid var(--color-2);
+    
+}
+
+.help-item.grad {
+    background: radial-gradient(circle, var(--color-2) 0%, transparent 80%);
+    border: none; 
+}
+
+
+/*🔸SECCIÓN OCHO */
+
+.ocho {
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ocho p {
+    margin: 0;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.ocho p:nth-child(2) {
+    font-size: 14rem; /* Tamaño inicial grande */
+    font-weight: bold;
+    color: var(--color-1);
+    font-family: 'Instrument Serif', sans-serif;
+}
+
+.ocho p:nth-child(3) {
+    opacity: 0; /* El último párrafo comienza invisible */
+    font-size: 4rem;
+    font-weight: 100;
+    color: var(--color-1);
+}
+
+/*🔸SECCIÓN FINAL*/
+
+.fin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    p {
+        width: 60vw;
+        padding-bottom: 1rem;
+    }
+}
+
+.volver-btn {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    /*overflow: hidden; */
+    border: 1px solid var(--color-1);
+    
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+
+    
+    color: var(--color-1);
+
+    .emoji {
+        position: absolute;
+       
+        top: -15%;
+       
+        font-size: 50px; /* Tamaño del emoji */
+        display: inline-block;
+        transition: opacity 0.3s ease; /* Suavidad al ocultar */
+      
+        opacity: 1; /* Oculto inicialmente */
+    }
+
+    .texto {
+
+        position: absolute;
+        top: 28%;
+        right: 25%;
+
+        opacity: 0; /* Oculto inicialmente */
+        white-space: nowrap; /* Mantiene el texto en una línea */
+        display: inline-block;
+
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        font-size: 1.2rem;
+
+    }
+
+}
+
+.volver-btn:hover {
+    background-color: var(--color-1);
+    color: var(--color-3);
+
+    transition: all 0.8s ease;
+}
+
