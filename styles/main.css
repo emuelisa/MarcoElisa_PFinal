@@ -87,7 +87,7 @@ a {
     text-decoration: none;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     h2 {
         font-size: 3rem;
     }
@@ -116,7 +116,7 @@ body {
 }
   
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .solo-movil {
         display: block; /* Visible en móviles */
         font-size: 0.8rem;
@@ -290,7 +290,7 @@ body {
     transform: rotate(45deg);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .close-icon {
         top: 20px;
         right: 20px;
@@ -325,11 +325,18 @@ body {
 
 @media (min-width: 768px) {
     .sticky-text {
+        left: 4%;
+        
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .sticky-text {
         top: 40%;
         left: 1.8%;
         
         transform: rotate(90deg);
-        font-size: 1rem;
     }
 }
 
@@ -354,6 +361,12 @@ body {
 
 .section-content {
     font-size: 1.2rem;
+}
+
+@media (min-width: 768px) {
+    .section-content {
+        font-size: 1.5rem;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -393,7 +406,7 @@ body {
     top: 58vh;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .line {
         width: 2px;
     }
@@ -421,7 +434,7 @@ body {
 /*🔸 02 - RECONOCIMEINTO DE LA EXPERIENCIA */
 
 .dos .section-content {
-    width: 60vw;
+    width: 80vw;
     z-index: 2;
 }
 
@@ -435,7 +448,17 @@ body {
     z-index: 1;
 }
 
+@media (min-width: 768px) {
+    .dos svg {
+        top: 40%;
+    }
+}
+
 @media (min-width: 1024px) {
+    .dos .section-content {
+        width: 60vw;
+    }
+
     .dos svg {
         right: -10%;
         top: 20%;
@@ -537,31 +560,37 @@ body {
     transition: transform 0.3s ease; /* Transición suave */
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .tres .section-content {
         padding-bottom: 25px;
     }
-
-    .carousel-wrap {
-        margin-left: 50vh;
-        margin-top: 0;
-    }
-
+   
     .carousel {
         gap: 1rem;
     }
 
     .carousel-item {
-        width: 28vw;
-        height: 60vh;
-
-        padding: 3rem;
-
-        border: 1px solid var(--color-1);
+        width: 42vw;
+        height: 62vh;
+        padding: 2rem;
     }
 
     .item-subtitle {
         font-size: 1.3rem;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .carousel-wrap {
+        margin-left: 50vh;
+        margin-top: 0;
+    }
+
+    .carousel-item {
+        width: 28vw;
+        height: 60vh;
+        padding: 3rem;
     }
 
     .carousel-item.active .item-title,
@@ -612,7 +641,7 @@ body {
 }
 
 .enfocate {
-    font-size: 4.3rem; 
+    font-size: 6rem; 
     font-weight: normal;
     font-family: 'Instrument Serif', sans-serif;
     margin: 0;
@@ -622,6 +651,16 @@ body {
 
 .text-overlay .section-content {
     width: 80vw;
+}
+
+@media (min-width: 768px) {
+    .text-overlay {
+        top: 30%;
+    }
+
+    .enfocate {
+        font-size: 10rem; 
+    }
 }
 
 @media (min-width: 1024px) {
@@ -641,7 +680,7 @@ body {
 /*🔸 06 */
 
 .seis .text-overlay p:first-child {
-    font-size: 4.3rem; 
+    font-size: 6rem; 
     font-family: 'Instrument Serif', sans-serif;
     font-weight: normal;
     margin: 0;
@@ -667,6 +706,13 @@ body {
     background: rgba(212, 216, 208, 0.3); 
     opacity: 0;
     z-index: 1;
+}
+
+@media (min-width: 768px) {
+    .seis .text-overlay p:first-child {
+        font-size: 10rem; 
+    }
+
 }
 
 @media (min-width: 1024px) {
@@ -699,6 +745,13 @@ body {
 .help-item.grad {
     background: radial-gradient(circle, var(--color-2) 0%, transparent 80%);
     border: none; 
+}
+
+@media (min-width: 768px) {
+    .help-item {
+        top: 75%; 
+        left: 75%;  
+    }
 }
 
 @media (min-width: 1024px) {
@@ -740,14 +793,20 @@ body {
     color: var(--color-1);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .ocho p:nth-child(2) {
         font-size: 14rem; /* Tamaño inicial grande */
     }
 
     .ocho p:nth-child(3) {
-        font-size: 4rem;
+        font-size: 3rem;
         font-weight: 100;
+    }
+}
+
+@media (min-width: 1024px) {
+    .ocho p:nth-child(3) {
+        font-size: 4rem;
     }
 }
 
@@ -808,7 +867,7 @@ body {
 
 
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .fin p {
         width: 60vw;
     }
