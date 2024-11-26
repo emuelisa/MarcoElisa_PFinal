@@ -221,7 +221,6 @@ function toggleAnimation() {
     }
   }
 
-
   // Detectar el clic o el toque en el círculo principal para iniciar o resetear
 const startPress = (e) => {
   e.preventDefault(); // Evitar la selección de texto en dispositivos móviles
