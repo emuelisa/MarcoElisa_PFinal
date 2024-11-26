@@ -356,6 +356,8 @@ body {
 
     padding: 1.5rem 2rem;
 
+    overflow-x: hidden;
+
     z-index: 1;
 }
 
