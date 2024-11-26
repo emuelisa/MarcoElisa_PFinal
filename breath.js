@@ -221,4 +221,33 @@ function toggleAnimation() {
     }
   }
 
+
+  // Detectar el clic o el toque en el círculo principal para iniciar o resetear
+const startPress = (e) => {
+  e.preventDefault(); // Evitar la selección de texto en dispositivos móviles
+  if (isAnimating) return; // Si ya estamos en animación, no hacer nada
+  
+  startInspiration(); // Inicia la animación de inspiración cuando se presiona
+};
+
+const endPress = (e) => {
+  e.preventDefault(); // Evitar la selección de texto al soltar en móviles
+  resetCircles(); // Resetea los círculos y la animación cuando se suelta
+};
+
+// Agregar eventos de inicio y fin de la presión
+mainCircle.addEventListener("mousedown", startPress); // Para escritorio
+mainCircle.addEventListener("touchstart", startPress); // Para móvil (inicio de la presión)
+
+mainCircle.addEventListener("mouseup", endPress); // Para escritorio
+mainCircle.addEventListener("touchend", endPress); // Para móvil (fin de la presión)
+
+// Opcionalmente, puedes agregar los eventos `touchcancel` y `mouseleave` para mayor control si el usuario desliza fuera del área del div
+mainCircle.addEventListener("mouseleave", endPress); // Si el mouse sale del área
+mainCircle.addEventListener("touchcancel", endPress); // Si el toque se cancela o el dedo se mueve fuera del div
+
+
+
+
+
  
