@@ -1,6 +1,3 @@
-gsap.config({
-    trialWarn: false,
-})
 
 /*⭐ ------------------------------------------------ REGISTRO DE PLUGINS de GSAP ------------------------------------------------------ ⭐*/ 
 
@@ -32,6 +29,7 @@ const tl00 = gsap.timeline({
     scrub: true, 
     pin: true, 
     pinSpacing: true,
+    
   }
 });
 
@@ -40,6 +38,15 @@ tl00.fromTo(line,
     { height: '42vh', ease: 'power1.out' } 
 );
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const title = document.querySelector(".fade-in-title");
+  
+  // Asegúrate de que el DOM está cargado antes de añadir la clase
+  setTimeout(() => {
+      title.classList.add("visible"); // Añade la clase después de un pequeño retraso
+  }, 100); // Pequeño retraso para asegurar que se aplica la transición
+});
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 
 /*🔶 TEXTO FIXED - Texto en el margen izquierdo que cambia dinámicamente para indicar la sección del scrolltelling en la que se encuentra el 
@@ -57,38 +64,39 @@ const sections = [
   { id: "cierre", text: "CIERRE"},
 ];
 
-sections.forEach(({ id, text }) => {
-  ScrollTrigger.create({
-    trigger: `#${id}`, // Selector de la sección
-    start: "top center", // Inicia cuando el top de la sección está en el centro de la pantalla
-    end: "bottom center", // Termina cuando el bottom de la sección está en el centro
-    onEnter: () => {
-      // Animo la opacidad hacia 0 antes de cambiar el texto
-      gsap.to(sectionText, {
-        opacity: 0,
-        duration: 0.3,
-        onComplete: () => {
-          // Cambiar el texto después de que la opacidad llega a 0
-          sectionText.textContent = text;
-          // Animo la opacidad de vuelta a 1
-          gsap.to(sectionText, { opacity: 1, duration: 0.5 });
-        }
-      });
-    },
-    onEnterBack: () => {
-      // Mismo comportamiento al volver a la sección
-      gsap.to(sectionText, {
-        opacity: 0,
-        duration: 0.3,
-        onComplete: () => {
-          sectionText.textContent = text;
-          gsap.to(sectionText, { opacity: 1, duration: 0.5 });
-        }
-      });
-    }
-  });
+document.addEventListener("DOMContentLoaded", () => { //Porque si no no funcionaba
+  sections.forEach(({ id, text }) => {
+    ScrollTrigger.create({
+      trigger: `#${id}`, // Selector de la sección
+      start: "top center", // Inicia cuando el top de la sección está en el centro de la pantalla
+      end: "bottom center", // Termina cuando el bottom de la sección está en el centro
+      onEnter: () => {
+        // Animo la opacidad hacia 0 antes de cambiar el texto
+        gsap.to(sectionText, {
+          opacity: 0,
+          duration: 0.3,
+          onComplete: () => {
+            // Cambiar el texto después de que la opacidad llega a 0
+            sectionText.textContent = text;
+            // Animo la opacidad de vuelta a 1
+            gsap.to(sectionText, { opacity: 1, duration: 0.5 });
+          }
+        });
+      },
+      onEnterBack: () => {
+        // Mismo comportamiento al volver a la sección
+        gsap.to(sectionText, {
+          opacity: 0,
+          duration: 0.3,
+          onComplete: () => {
+            sectionText.textContent = text;
+            gsap.to(sectionText, { opacity: 1, duration: 0.5 });
+          }
+        });
+      }
+    });
 });
-
+});
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 
 /*🔶 SECCIÓN 01 - El texto comienza con un color muy clarito. Divido el texto en carácteres para poder aplicar letra por letra un color más
@@ -173,6 +181,10 @@ const carousel = bloque03.querySelector('.carousel');
 const h203 = bloque03.querySelector('h2');
 const sc03 = bloque03.querySelector('.section-content');
 
+const getTranslateXValue = () => {
+  return window.innerWidth < 1024 ? '-585vw' : '-195vw'; // Usar -100vw para móviles y -195vw para otros
+};
+
 const tl03 = gsap.timeline({
     scrollTrigger: {
       trigger: bloque03,
@@ -199,7 +211,7 @@ const tl03 = gsap.timeline({
   )
   .fromTo(carousel, 
     {x:'0px'}, 
-    {x:'-195vw'} 
+    {x: getTranslateXValue() } 
   )
   .fromTo(carousel,
     {opacity: 1},
@@ -231,16 +243,20 @@ carouselItems.forEach(item => {
 
 /*🔶 SECCIÓN 03.03 - Custom mouse para cuando se hace hover sobre un item del carrusel. Para que el usaurio sepa que puede desplegar más información en los items, he decidido hacer que el mouse al hacer hover sobre un item se convierta en un círculo con el símbolo + */
 
-//🆘No termina de ir muy bien. Implementar que cuando está sobre item active, en vez de un + sea un -
-
 carouselItems.forEach(item => {
     let circlePlus;
+    
+    const isDesktop = () => window.innerWidth >= 1024;
 
     item.addEventListener('mouseenter', function() {
+        if (!isDesktop()) return;
+
         // Crear un nuevo elemento div para el círculo
         circlePlus = document.createElement('div');
         circlePlus.classList.add('circle-plus');
+       
         circlePlus.innerText = "+"; // El signo +
+        
 
         item.appendChild(circlePlus);
 
@@ -253,22 +269,29 @@ carouselItems.forEach(item => {
 
     // Mover el círculo con el ratón
     item.addEventListener('mousemove', function(e) {
-        if (circlePlus) {
-            const mouseX = e.clientX; 
-            const mouseY = e.clientY; 
-           
-            const offsetX = 15;  
-            const offsetY = 15; 
+      if (!isDesktop() || !circlePlus) return;
 
-            // Posicionar el círculo en las coordenadas del ratón
-            circlePlus.style.left = `${mouseX - item.getBoundingClientRect().left - offsetX}px`;
-            circlePlus.style.top = `${mouseY - item.getBoundingClientRect().top - offsetY}px`;
-        }
+      const mouseX = e.clientX; 
+      const mouseY = e.clientY; 
+      
+      const offsetX = 15;  
+      const offsetY = 15; 
+
+      // Posicionar el círculo en las coordenadas del ratón
+      circlePlus.style.left = `${mouseX - item.getBoundingClientRect().left - offsetX}px`;
+      circlePlus.style.top = `${mouseY - item.getBoundingClientRect().top - offsetY}px`;
+
+      if( item.classList.contains('active')) {
+        circlePlus.innerHTML = '<span class="inner-text">_</span>';
+
+      }else {
+        circlePlus.innerText = "+"; // El signo +
+      }
     });
 
     // Eliminar el círculo cuando el mouse sale
     item.addEventListener('mouseleave', function() {
-        if (circlePlus) {
+      if (!isDesktop() || !circlePlus) return;
             // Iniciar la animación de desaparición
             circlePlus.style.transform = 'scale(0)';
             circlePlus.style.opacity = '0';
@@ -276,11 +299,11 @@ carouselItems.forEach(item => {
             setTimeout(() => {
                 circlePlus.remove();
             }, 300); 
-        }
+        
     });
 });
 
-
+//
 
 
 const bloque04 = document.querySelector(".cuatro");
@@ -290,10 +313,10 @@ const sc04 = bloque04.querySelector('.section-content');
 const tl04 = gsap.timeline({
   scrollTrigger: {
       trigger: bloque04, 
-      start: "top 90%",   
-      end: "bottom 30%",  
+      start: "top top",   
+      end: "bottom top",  
       scrub: true,
-       
+      pin: true,  
      
       onEnter: () => {
           // Cambiar colores al entrar en la sección "fin"
@@ -339,8 +362,6 @@ tl04.fromTo(h204,
   { opacity: 1, y: 0, duration: 0.5}, 
 );
 
-
-
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 
 /*🔶 SECCIÓN 05 - Animación sección ENFÓCATE. Texto que inicialmente esta desenfocado y pasa a enfocarse mediente la propiedad blur de CSS */
@@ -379,8 +400,6 @@ const tl06 = gsap.timeline({
     pin: true, 
   },
 });
-
-
 
 //Los círculos crecen uno detrás de otro y tamaños cada vez más grandes
 
@@ -458,31 +477,35 @@ const bloque08 = document.querySelector('.ocho');
 const ansiedad = bloque08.querySelector('.ansiedad');
 const mensaje = bloque08.querySelector('.mensaje');
 
+// Determinar los valores de 'y' según el tamaño de pantalla
+const getYValueForAnsiedad = () => (window.innerWidth < 1024 ? -10 : -80);
+const getYValueForMensaje = () => (window.innerWidth < 1024 ? -10 : -120);
+
 const tl08 = gsap.timeline({
-    scrollTrigger: {
-      trigger: bloque08,
-      start: "top top",
-      end: "bottom top",
-      scrub: true,
-      pin: true
-    }
-  });
+  scrollTrigger: {
+    trigger: bloque08,
+    start: "top top",
+    end: "bottom top",
+    scrub: true,
+    pin: true,
+  },
+});
 
-  //Reducir el tamaño de "ANSIEDAD"
-  tl08.to(ansiedad, {
-    scale: 0.1, 
-    y: -80,
-    duration: 3,
-    ease: "power3.out",
-  });
+// Reducir el tamaño de "ANSIEDAD"
+tl08.to(ansiedad, {
+  scale: 0.1,
+  y: getYValueForAnsiedad(), // Usar el valor dinámico para 'y'
+  duration: 3,
+  ease: "power3.out",
+});
 
-  //Aparición del mensaje final
-  tl08.to(mensaje, {
-    opacity: 1, // Cambia opacidad de 0 a 1
-    y: -120,
-    duration: 2,
-    ease: "power2.inOut"
-  });
+// Aparición del mensaje final
+tl08.to(mensaje, {
+  opacity: 1, // Cambia opacidad de 0 a 1
+  y: getYValueForMensaje(), // Usar el valor dinámico para 'y'
+  duration: 2,
+  ease: "power2.inOut",
+});
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
