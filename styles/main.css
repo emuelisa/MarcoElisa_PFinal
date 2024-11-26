@@ -26,16 +26,18 @@
     font-style: italic;
 }
 
+/* 🔸 SCROLL */
 
 ::-webkit-scrollbar {
     display: none; /* Oculta la barra de desplazamiento en navegadores Webkit (Chrome, Safari) */
 }
-  
-  /* En Firefox, puedes usar esto */
+
 html {
-    scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
-    -ms-overflow-style: none; /* Oculta la barra de desplazamiento en IE/Edge */
+    scrollbar-width: none; /*Oculta la barra de desplazamiento en Firefox */
+    -ms-overflow-style: none; /*Oculta la barra de desplazamiento en IE/Edge */
 }
+
+/* 🔸 VARIABLES CSS */
 
 :root {
     --color-1: #777E79;
@@ -43,52 +45,135 @@ html {
     --color-3: #F9F5F0;
 }
 
-h1 {
+* {
+    box-sizing: border-box;
+}
+
+/* 🔸 TIPOGRAFÍA GLOBAL */
+
+h1, h2, h3 {
+    font-weight: normal;
     font-family: 'Instrument Serif', sans-serif;
+}
+
+h1 {
     font-size: 4rem;
 }
 
 h2 {
-    font-family: 'Instrument Serif', sans-serif;
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 0;
 }
 
-
 h3 {
-    font-family: 'Instrument Serif', sans-serif;
     font-size: 1.5rem;
 }
 
+p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+}
 
 a {
     text-decoration: none;
 }
 
-p {
-    font-family: 'Inter', sans-serif; 
-    font-weight: 200;
+@media (min-width: 1024px) {
+    h2 {
+        font-size: 3rem;
+    }
 }
 
-/* index.html */
-body {
+
+/* 🔸 ESTILOS GENERALES */
+
+html,body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    background-color: var(--color-3);
-
     overflow-x: hidden;
 
+    background-color: var(--color-3);
 }
 
 
+.solo-movil {
+    display: none; /* Por defecto, no se muestra */
+}
+  
 
-#breathing-experience {
+@media (max-width: 768px) {
+    .solo-movil {
+        display: block; /* Visible en móviles */
+        font-size: 0.8rem;
+        color: var(--color-2);
+    }
+}
+
+/* 🔸 SECCIÓN - EXPERIENCIA DE RESPIRACIÓN */
+
+.breathing-experience {
     height: 100vh;
     display: flex;
-   
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
+
+.instruction {
+    position: absolute;
+    top: 2%;
+
+    h1 {
+        color: var(--color-2);
+        margin-bottom: 0;
+    }
+
+    .section-content {
+        color: var(--color-2);
+        margin-top: 1rem;
+        opacity: 1;
+        transition: opacity 1s ease-out;
+    }
+}
+
+.main-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 15vw;
+    height: 15vw;
+    background-color: var(--color-2);
+    border-radius: 50%;
+    z-index: 10;
+
+    .counter {
+        font-size: 4rem;
+        color: var(--color-3);
+        font-family: 'Inter', sans-serif;
+        font-weight: 200 ;
+    }
+}
+
+.expanding-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15vw;
+    height: 15vw;
+    background-color: rgba(212, 216, 208, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 5;
+}
+
+/* 🔸 BOTÓN FIJO PARA ACCEDER A LA EXPERIENCIA DE RESPIRACIÓN */
 
 .scrolltelling-btn {
     position: fixed;
@@ -103,57 +188,53 @@ body {
     height: 50px;
     border-radius: 50%; /* Hace el botón redondo */
 
-    border: none;
     background-color: var(--color-1);
+    text-decoration: none; /* Elimina subrayado */
+    z-index: 999999;
+
+    /* Transición para el crecimiento */
+    transition: transform 1.5s ease;
+    cursor: pointer;
+}
+
+.scrolltelling-btn span {
     color: var(--color-3);
+    font-size: 20px;
+    font-family: 'Instrument Serif', sans-serif;
+    font-weight: 200;
 
-
-    &:hover {
-        transform: scale(1.1);
-    }
+    /* Transición para la opacidad del texto */
+    transition: opacity 0.1s ease;
 }
 
-/* about.html */
-
-.welcome-screen {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    background-color: var(--color-1);
-    color: var(--color-3);
+.scrolltelling-btn:hover {
+    transform: scale(1.1);
 }
 
-.line {
-    position: absolute;
-    display: block;
-    width: 2px;
-    height: 0px;
-    background-color: var(--color-3);
-    top: 58vh;
+.scrolltelling-btn.clicked {
+    transform: scale(100); /* Crecimiento del círculo */
 }
 
-/*🔸CRUZ DE CIERRE PARA VOLVER A LA EXPERIENCIA DE RELAJACIÓN */
+.scrolltelling-btn.clicked span {
+    opacity: 0; /* Desvanece el texto */
+}
+
+/* 🔸 CRUZ DE CIERRE PARA VOLVER A LA EXPERIENCIA DE RELAJACIÓN */
 
 .close-icon {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    right: 10px;
     width: 50px;
     height: 50px;
     cursor: pointer;
-
     z-index: 9999;
 }
 
 .close-icon .leftright,
 .close-icon .rightleft {
-    height: 4px;
-    width: 50px;
+    height: 3px;
+    width: 40px;
     position: absolute;
     margin-top: 24px;
     background-color: var(--color-1);
@@ -177,112 +258,175 @@ body {
     transform: rotate(45deg);
 }
 
+@media (min-width: 1024px) {
+    .close-icon {
+        top: 20px;
+        right: 20px;
+    }
+
+    .close-icon .leftright,
+    .close-icon .rightleft {
+        height: 4px;
+        width: 50px;
+    }
+}
+
 /*🔸INDICADOR FIXED DE LAS SECCIONES*/
 
 .sticky-text {
     position: fixed;
-    top: 40%;
-    left: 1.8%;
+    top: 94%;
+    left: 10%;
     
-    transform: rotate(90deg);
+    transform: rotate(0deg);
     transform-origin: left center;
+
     font-family: 'Instrument Serif', sans-serif;
-    font-size: 1rem;
+    font-size: 0.7rem;
+    text-align: center;
     text-transform: uppercase;
     white-space: nowrap;
     color: var(--color-2);
 
-    text-align: center;
-
     z-index: 100;
 }
 
-/*🔸CONFIGURACIÓN GENERAL DE LAS SECCIONES */
+@media (min-width: 768px) {
+    .sticky-text {
+        top: 40%;
+        left: 1.8%;
+        
+        transform: rotate(90deg);
+        font-size: 1rem;
+    }
+}
+
+
+/* 🔸 ESTILOS SECCIONES GENERALES */
 
 .section {
     display: flex;
     flex-direction: column;
+    position: relative;
 
     height: 100vh;
-    position: relative;
-    z-index: 1;
+    max-width: 100vw;
 
     background-color: var(--color-3);
     color: var(--color-1);
 
-    padding-left: 5rem;
-    padding-right: 2rem;
-}
+    padding: 1.5rem 2rem;
 
-.section-full { 
-    display: flex;
-    flex-direction: column;
-    
-    height: 100vh;
-    position: relative;
     z-index: 1;
-
-    background-color: var(--color-3);
-    color: var(--color-1);
 }
 
 .section-content {
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
-/*🔸SECCIÓN 1 - RECONOCIMEINTO DE LA EXPERIENCIA */
+@media (min-width: 1024px) {
+    .section {
+        padding: 0 3.8rem;
+    }
+    
+    .section-content {
+        font-size: 2rem;
+    }
+}
+
+/* 🔸 00 - WELCOME SECTION */
+
+.welcome-screen {
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--color-1);
+    color: var(--color-3);
+}
+
+.fade-in-title {
+    opacity: 0; /* Comienza invisible */
+    transition: opacity 2s ease; /* Suaviza la transición */
+}
+.fade-in-title.visible {
+    opacity: 1; /* Hace visible el título */
+}
+
+.line {
+    position: absolute;
+    display: block;
+    width: 1px;
+    height: 0px;
+    background-color: var(--color-3);
+    top: 58vh;
+}
+
+@media (min-width: 1024px) {
+    .line {
+        width: 2px;
+    }
+} 
+
+/*🔸 01 - RECONOCIMEINTO DE LA EXPERIENCIA */
 
 .uno {
-    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-
-    color: var(--color-2);
-
-    p {
-        width: 60vw;
-        margin-bottom: 0;
-    }
-    
 }
-/*🔸SECCIÓN 2 - RECONOCIMEINTO DE LA EXPERIENCIA */
+.uno p {
+    width: 80vw;
+    margin-bottom: 0;
+}
 
-.dos {
-    position: relative;
-
-    .section-content {
+@media (min-width: 1024px) {
+    .uno p {
         width: 60vw;
     }
+} 
 
-    svg {
-        position: absolute;
+
+/*🔸 02 - RECONOCIMEINTO DE LA EXPERIENCIA */
+
+.dos .section-content {
+    width: 60vw;
+    z-index: 2;
+}
+
+.dos svg {
+    position: absolute;
+    right: -50%;
+    top: 60%;
+    opacity: 0.3; /* Baja opacidad */
+    width: 140vw;
+    height: auto;
+    z-index: 1;
+}
+
+@media (min-width: 1024px) {
+    .dos svg {
         right: -10%;
         top: 20%;
-        opacity: 0.3; /* Baja opacidad */
         width: 70vw;
-        height: auto;
-        z-index: 1;
     }
 }
 
-/*🔸SECCIÓN 3 - CARRUSEL HORIZONTAL DE SÍNTOMAS*/
+/*🔸03 - CARRUSEL HORIZONTAL DE SÍNTOMAS*/
 
-.tres {
-    
-    div:first-child {
-        padding-bottom: 50px;
-    }
+.tres .section-content {
+    padding-bottom: 10px;
 }
 
 .carousel-wrap {
+    width: 100vw;
     overflow: hidden;
-    margin-left: 50vh;
+    margin-left: 0;
+    margin-top: 1rem;
 }
 
 .carousel {
     display: flex;
-    gap: 1rem;
+    gap: 0.8rem;
 
     overflow-x: visible;  
     scroll-snap-type: x mandatory; 
@@ -293,31 +437,30 @@ body {
     cursor: none;
     
     position: relative;
-    flex-shrink: 0;  /* Evita que los elementos se hagan pequeños */
+    flex-shrink: 0; 
     display: flex;
     flex-direction: column;
     justify-content: end;
 
+    width: 70vw;
+    height: 55vh;
 
-    width: 22vw;
-    height: 50vh;
-
-    border: 1px solid var(--color-1);
+    border: 1px solid var(--color-2);
     background-color: var(--color-3);
     color: var(--color-1);
-    padding: 3rem;
+    padding: 0 1.2rem;
 
     transition: all 0.4s ease-in;
 }
 
 .item-subtitle {
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 
 .item-description {
-    display: none; /* Ocultamos la descripción por defecto */
+    display: none; /* La descripción está oculta por defecto*/
     opacity: 0;
-    transform: translateY(20px); /* Lo posicionamos un poco debajo */
+    transform: translateY(20px); 
     transition: all 0.3s ease-out;
 }
 
@@ -326,14 +469,17 @@ body {
     background-color: var(--color-2);
 }
 
+.carousel-item.active .item-title,
+.carousel-item.active .item-subtitle{
+    opacity: 0;
+}
+
 .carousel-item.active .item-description {
     display: block;
     opacity: 1;
-    transform: translateY(0); /* Deslizamos hacia arriba */
+    transform: translateY(0); /* Deslizo hacia arriba */
 }
 
-
-/* Estilo para el círculo que aparece cuando el ratón pasa sobre el item */
 .carousel-item .circle-plus {
     position: absolute;
     top: 50%;
@@ -346,14 +492,55 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: var(--color-3);
     font-size: 20px;
     opacity: 0;
     pointer-events: none; 
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/*🔸SECCIÓN 5 - VIDEO A PANTALLA COMPLETA */
+.inner-text {
+    font-size: 20px; /* Tamaño del texto */
+    transform: translateY(-10px); /* Mover solo el texto hacia arriba */
+    transition: transform 0.3s ease; /* Transición suave */
+}
+
+@media (min-width: 1024px) {
+    .tres .section-content {
+        padding-bottom: 25px;
+    }
+
+    .carousel-wrap {
+        margin-left: 50vh;
+        margin-top: 0;
+    }
+
+    .carousel {
+        gap: 1rem;
+    }
+
+    .carousel-item {
+        width: 28vw;
+        height: 60vh;
+
+        padding: 3rem;
+
+        border: 1px solid var(--color-1);
+    }
+
+    .item-subtitle {
+        font-size: 1.3rem;
+    }
+
+    .carousel-item.active .item-title,
+    .carousel-item.active .item-subtitle{
+        opacity: 1;
+    }
+
+}
+
+/*🔸05 - VIDEO A PANTALLA COMPLETA */
+
 .cinco {
     color: var(--color-3);
 }
@@ -387,14 +574,14 @@ body {
 
     position: absolute;
     align-self: center;
-    top: 30%;
+    top: 35%;
     z-index: 6; /* Por encima del video y del ruido */
     text-align: center;
 }
 
 .enfocate {
-    font-size: 14rem; 
-    font-weight: bold;
+    font-size: 4.3rem; 
+    font-weight: normal;
     font-family: 'Instrument Serif', sans-serif;
     margin: 0;
 
@@ -402,22 +589,30 @@ body {
 }
 
 .text-overlay .section-content {
-    width: 60vw;
+    width: 80vw;
 }
 
-/*🔸SECCIÓN SEIS */
+@media (min-width: 1024px) {
+    .text-overlay {
+        top: 23%;
+    }
 
-.seis {
-    color: var(--color-1);
-    
+    .enfocate {
+        font-size: 14rem; 
+    }
+
+    .text-overlay .section-content {
+        width: 60vw;
+    }
 }
+
+/*🔸 06 */
 
 .seis .text-overlay p:first-child {
-    font-size: 14rem; 
-    font-weight: bold;
+    font-size: 4.3rem; 
     font-family: 'Instrument Serif', sans-serif;
+    font-weight: normal;
     margin: 0;
-
 }
 
 .breath {
@@ -437,20 +632,22 @@ body {
     width: 0px; /* Comienza como un punto pequeño */
     height: 0px;
     border-radius: 50%;
-    background: rgba(212, 216, 208, 0.3); /* Azul translúcido */
+    background: rgba(212, 216, 208, 0.3); 
     opacity: 0;
     z-index: 1;
 }
 
-
-/*🔸SECCIÓN SIETE */
-
-.siete {
-    position: relative;
-
-    .section-content {
-        width: 50vw;
+@media (min-width: 1024px) {
+    .seis .text-overlay p:first-child {
+        font-size: 14rem; 
     }
+
+}
+
+/*🔸07 */
+
+.siete .section-content {
+    width: 80vw;
 }
 
 .help-item {
@@ -458,14 +655,13 @@ body {
     justify-content: center;
     align-items: center;
     position: absolute;
-    width: 25vw;
-    height: 25vw;
+    width: 35vw;
+    height: 35vw;
     border-radius: 50%;
-    top: 65%; 
+    top: 85%; 
     left: 75%; 
     transform: translate(-50%, -50%); 
-    border: 1px solid var(--color-2);
-    
+    border: 1px solid var(--color-2);   
 }
 
 .help-item.grad {
@@ -473,13 +669,23 @@ body {
     border: none; 
 }
 
+@media (min-width: 1024px) {
+    .siete .section-content {
+        width: 50vw;
+    }
 
-/*🔸SECCIÓN OCHO */
+    .help-item {
+        width: 25vw;
+        height: 25vw;
+        top: 65%; 
+        left: 75%;  
+    }
+}
+
+/*🔸08 */
 
 .ocho {
     text-align: center;
-    position: relative;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -491,31 +697,39 @@ body {
 }
 
 .ocho p:nth-child(2) {
-    font-size: 14rem; /* Tamaño inicial grande */
-    font-weight: bold;
+    font-size: 4.3rem; /* Tamaño inicial grande */
+    font-weight: normal;
     color: var(--color-1);
     font-family: 'Instrument Serif', sans-serif;
 }
 
 .ocho p:nth-child(3) {
     opacity: 0; /* El último párrafo comienza invisible */
-    font-size: 4rem;
-    font-weight: 100;
     color: var(--color-1);
 }
 
-/*🔸SECCIÓN FINAL*/
+@media (min-width: 1024px) {
+    .ocho p:nth-child(2) {
+        font-size: 14rem; /* Tamaño inicial grande */
+    }
+
+    .ocho p:nth-child(3) {
+        font-size: 4rem;
+        font-weight: 100;
+    }
+}
+
+/*🔸FINAL */
 
 .fin {
-    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+}
 
-    p {
-        width: 60vw;
-        padding-bottom: 1rem;
-    }
+.fin p {
+    width: 80vw;
+    padding-bottom: 1rem;
 }
 
 .volver-btn {
@@ -532,45 +746,46 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-
-
     
     color: var(--color-1);
-
-    .emoji {
-        position: absolute;
-       
-        top: -15%;
-       
-        font-size: 50px; /* Tamaño del emoji */
-        display: inline-block;
-        transition: opacity 0.3s ease; /* Suavidad al ocultar */
-      
-        opacity: 1; /* Oculto inicialmente */
-    }
-
-    .texto {
-
-        position: absolute;
-        top: 28%;
-        right: 25%;
-
-        opacity: 0; /* Oculto inicialmente */
-        white-space: nowrap; /* Mantiene el texto en una línea */
-        display: inline-block;
-
-        font-family: 'Inter', sans-serif;
-        font-weight: 300;
-        font-size: 1.2rem;
-
-    }
-
+}
+.volver-btn .emoji {
+    position: absolute;
+    top: -15%;
+    font-size: 50px; /* Tamaño del emoji */
+    display: inline-block;
+    
+    transition: opacity 0.3s ease; /* Suavidad al ocultar */
+  
+    opacity: 1; /* Oculto inicialmente */
 }
 
-.volver-btn:hover {
-    background-color: var(--color-1);
-    color: var(--color-3);
+.volver-btn .texto {
+    position: absolute;
+    top: 28%;
+    right: 25%;
 
-    transition: all 0.8s ease;
+    opacity: 0; /* Oculto inicialmente */
+    white-space: nowrap; /* Mantiene el texto en una línea */
+    display: inline-block;
+
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+
+
+@media (min-width: 1024px) {
+    .fin p {
+        width: 60vw;
+    }
+
+    .volver-btn:hover {
+        background-color: var(--color-1);
+        color: var(--color-3);
+    
+        transition: all 0.8s ease;
+    }
 }
 
