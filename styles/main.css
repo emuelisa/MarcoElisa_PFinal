@@ -152,34 +152,57 @@ body {
 }
 
 .main-circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
-    width: 15vw;
-    height: 15vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+
+    top: 70%;
+    left: 50%;
+
+    
+    width: 50vw;
+    height: 50vw;
+    
     background-color: var(--color-2);
     border-radius: 50%;
-    z-index: 10;
-
-    .counter {
-        font-size: 4rem;
-        color: var(--color-3);
-        font-family: 'Inter', sans-serif;
-        font-weight: 200 ;
-    }
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 99;
+}
+.main-circle .counter {
+    font-size: 4rem;
+    color: var(--color-3);
+    font-family: 'Inter', sans-serif;
+    font-weight: 200 ;
 }
 
 .expanding-circle {
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
-    width: 15vw;
-    height: 15vw;
+    width: 50vw;
+    height: 50vw;
     background-color: rgba(212, 216, 208, 0.3);
     border-radius: 50%;
     transform: translate(-50%, -50%) scale(0);
     z-index: 5;
+}
+
+@media (min-width: 1024px) {
+    .main-circle {
+        top: 65%;
+       
+        width: 15vw;
+        height: 15vw;
+    }
+    
+    .expanding-circle {
+        top: 65%;
+    
+        width: 15vw;
+        height: 15vw;
+    }  
 }
 
 /* 🔸 BOTÓN FIJO PARA ACCEDER A LA EXPERIENCIA DE RESPIRACIÓN */
