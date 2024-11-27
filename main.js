@@ -6,12 +6,12 @@ gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(ScrambleTextPlugin);
 gsap.registerPlugin(DrawSVGPlugin);
+gsap.registerPlugin(ScrollToPlugin);
+
 
 /*⭐ ------------------------------------------------------ INTRODUCCIÓN ---------------------------------------------------------------- ⭐*/
 
 /* Las animaciones de este proyecto están basadas principalmente en ScrollTrigger de GSAP. Cada sección ocupa el 100% del alto del viewport (100vh) y activa su propia animación al entrar en escena. El desplazamiento está sincronizado con las animaciones, de modo que no se avanza a la siguiente sección hasta que la animación actual finaliza. De esta forma, consigo un scrolltelling dinámico, donde es el usuario quien construye la interfaz a medida que avanza, teniendo el control sobre lo que va apareciendo en pantalla y cómo evoluciona la experiencia visual. */
-
-//1️⃣BARRA DE SCROLL PERSONALIZADA 
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
@@ -29,7 +29,6 @@ const tl00 = gsap.timeline({
     scrub: true, 
     pin: true, 
     pinSpacing: true,
-    
   }
 });
 
@@ -190,10 +189,11 @@ const tl03 = gsap.timeline({
       trigger: bloque03,
       start: "top top",
       end: "bottom top",
-      scrub: true,
+      scrub: 5,
       pin: true,
     },
 
+   
   });
 
   tl03
@@ -211,12 +211,16 @@ const tl03 = gsap.timeline({
   )
   .fromTo(carousel, 
     {x:'0px'}, 
-    {x: getTranslateXValue() } 
+    {x: getTranslateXValue(),
+     ease: "power2.inOut", // Suaviza el desplazamiento
+     duration: 100, // Hace que el desplazamiento sea menos brusco (una especie de scroll smooth)
+    } 
   )
   .fromTo(carousel,
     {opacity: 1},
     {opacity: 0, duration: 0.8}
-  );
+  )
+  .to({}, {duration: 2});
 
 /*🔶 SECCIÓN 03.02 - Control de la aparición de la información en los items del carrusel. Cada síntoma contiene una descrición algo extensa, la cual he decidido ocultar (solo se muestra título y pequeña descripción) Cuando el usuario hace click sobre un síntoma puede desplegar la información. Esto lo hago mediante el control de los items 'active' del carrusel. Solo puede haber 1 item abierto, hay una función que verifica si hay algun item abierto para cerrarlo antes de abirir otro */
 
@@ -360,7 +364,8 @@ tl04.fromTo(h204,
 .fromTo(sc04,
   { opacity: 0, y: 50 }, 
   { opacity: 1, y: 0, duration: 0.5}, 
-);
+)
+.to({}, {duration: 2}); //He añadido una pequeña pausa al terminar proque si no pasaba de sección muy rápido
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -383,7 +388,9 @@ tl05.fromTo(
   enfocate, 
   { filter: "blur(10px)" },  // Estado inicial
   { filter: "blur(0px)" } // Estado final
-);
+)
+.to({}, {duration: 2}); //He añadido una pequeña pausa al terminar proque si no pasaba de sección muy rápido
+
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 
 /*🔶 SECCIÓN 06 - Animación sección RESPIRA. Son 4 círculos concentricos que simulan una inspiración para complementar el texto */
@@ -396,7 +403,7 @@ const tl06 = gsap.timeline({
     trigger: bloque06, 
     start: "top top",
     end: "bottom top",   
-    scrub: true,
+    scrub: 1.5,
     pin: true, 
   },
 });
@@ -431,7 +438,8 @@ tl06
   opacity: 1, 
   duration: 1,
   ease: "power1.out",
-}, "+=0.5");  
+}, "+=0.5")
+.to({}, {duration: 3}); //He añadido una pequeña pausa al terminar proque si no pasaba de sección muy rápido 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -448,7 +456,7 @@ const tl07 = gsap.timeline({
     trigger: bloque07, 
     start: "top top", 
     end: "bottom top",
-    scrub: true,
+    scrub: 2,
     pin: true, 
   },
 });
@@ -466,7 +474,8 @@ tl07
   .to(circles[2], { x: "-40vw", y: "10vh", duration: 1 }, "<")
   .to(circles[3], { width: "23vh", height: "23vh", x: "-20vw", y: "-20vh", duration: 1 }, "<")
   .to(circles[4], { width: "16vh", height: "16vh", x: "-65vw", y: "-20vh", duration: 1 }, "<")
-  .fromTo(tex, { opacity: 0, duration: 1 },{ opacity: 1, duration: 1 }, "<"); // Aparece el texto de los círculos
+  .fromTo(tex, { opacity: 0, duration: 1 },{ opacity: 1, duration: 1 }, "<") // Aparece el texto de los círculos
+  .to({}, {duration: 2}); //He añadido una pequeña pausa al terminar proque si no pasaba de sección muy rápido 
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
@@ -486,7 +495,7 @@ const tl08 = gsap.timeline({
     trigger: bloque08,
     start: "top top",
     end: "bottom top",
-    scrub: true,
+    scrub: 1.5,
     pin: true,
   },
 });
@@ -505,7 +514,8 @@ tl08.to(mensaje, {
   y: getYValueForMensaje(), // Usar el valor dinámico para 'y'
   duration: 2,
   ease: "power2.inOut",
-});
+})
+.to({}, {duration: 3}); //He añadido una pequeña pausa al terminar proque si no pasaba de sección muy rápido 
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */

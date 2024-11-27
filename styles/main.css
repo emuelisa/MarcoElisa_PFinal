@@ -381,6 +381,15 @@ body {
     }
 }
 
+#smooth-wrapper {
+    overflow: hidden;
+    height: 100vh;
+  }
+  
+  #smooth-content {
+    will-change: transform;
+  }
+
 /* 🔸 00 - WELCOME SECTION */
 
 .welcome-screen {
