@@ -469,10 +469,18 @@ tl07
   );
 
   // Función para detectar el tamaño de la pantalla
-function getDeviceSize() {
-  const isMobile = window.innerWidth <= 768; // Define el ancho de pantalla para móviles
-  return isMobile ? "mobile" : "desktop"; // Devuelve 'mobile' o 'desktop' según el caso
-}
+  function getDeviceSize() {
+    const width = window.innerWidth;
+  
+    if (width <= 768) {
+      return "mobile"; // Para pantallas de móvil (ancho <= 768px)
+    } else if (width <= 1024) {
+      return "tablet"; // Para pantallas de tablet (768px < ancho <= 1024px)
+    } else {
+      return "desktop"; // Para pantallas de escritorio (ancho > 1024px)
+    }
+  }
+  
 
 // Establecer los valores diferentes dependiendo del tamaño de la pantalla
 function setCircleValues() {
@@ -481,12 +489,20 @@ function setCircleValues() {
   // Establecer los valores de posición y tamaño de cada círculo según el dispositivo
   if (device === "mobile") {
     return {
-      circle1: { width: "18vh", height: "18vh", x: "-15vw", y: "-56vh" },
-      circle2: { x: "-70vw", y: "-11vh" },
-      circle3: { width: "25vh", height: "25vh", x: "-52vw", y: "-35vh" },
-      circle4: { width: "11vh", height: "11vh", x: "-70vw", y: "-55vh" },
+      circle1: { width: "18vh", height: "18vh", x: "2vw", y: "-54vh" },
+      circle2: { x: "-50vw", y: "-3vh" },
+      circle3: { width: "27vh", height: "27vh", x: "-25vw", y: "-28vh" },
+      circle4: { width: "11vh", height: "11vh", x: "-60vw", y: "-47vh" },
     };
-  } else {
+  } else if (device === "tablet") {
+    console.log("tablet");
+    return {
+      circle1: { width: "28vh", height: "28vh", x: "0vw", y: "-35vh" },
+      circle2: { x: "-55vw", y: "2vh" },
+      circle3: { width: "25vh", height: "25vh", x: "-35vw", y: "-23vh" },
+      circle4: { width: "14vh", height: "14vh", x: "-60vw", y: "-38vh" },
+    };
+  } else { // Para escritorio (desktop)
     return {
       circle1: { width: "26vh", height: "26vh", x: "10vw", y: "-45vh" },
       circle2: { x: "-40vw", y: "5vh" },

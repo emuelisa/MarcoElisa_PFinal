@@ -93,7 +93,6 @@ a {
     }
 }
 
-
 /* 🔸 ESTILOS GENERALES */
 
 html,body {
@@ -126,6 +125,56 @@ body {
     }
 }
 
+/* 🔸 ESTILOS SECCIONES GENERALES */
+
+.section {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    height: 100vh;
+    max-width: 100vw;
+
+    background-color: var(--color-3);
+    color: var(--color-1);
+
+    padding: 1.5rem 2rem;
+
+    overflow: hidden;
+
+    z-index: 1;
+}
+
+.section-content {
+    font-size: 1.2rem;
+}
+
+@media (min-width: 768px) {
+    .section-content {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .section {
+        padding: 0 3.8rem;
+    }
+    
+    .section-content {
+        font-size: 2rem;
+    }
+}
+
+#smooth-wrapper {
+    overflow: hidden;
+    height: 100vh;
+}
+  
+#smooth-content {
+    will-change: transform;
+}
+
+
 /* 🔸 SECCIÓN - EXPERIENCIA DE RESPIRACIÓN */
 
 .breathing-experience {
@@ -140,17 +189,19 @@ body {
     position: absolute;
     top: 2%;
 
-    h1 {
-        color: var(--color-2);
-        margin-bottom: 0;
-    }
+}
 
-    .section-content {
-        color: var(--color-2);
-        margin-top: 1rem;
-        opacity: 1;
-        transition: opacity 1s ease-out;
-    }
+.instruction h1 {
+    max-width: 80vw-;
+    color: var(--color-2);
+    margin-bottom: 0;
+}
+
+.instruction .section-content {
+    color: var(--color-2);
+    margin-top: 1rem;
+    opacity: 1;
+    transition: opacity 1s ease-out;
 }
 
 .main-circle {
@@ -163,10 +214,9 @@ body {
     top: 70%;
     left: 50%;
 
-    
     width: 50vw;
     height: 50vw;
-    
+
     background-color: var(--color-2);
     border-radius: 50%;
     transform: translate(-50%, -50%) scale(1);
@@ -194,14 +244,14 @@ body {
 @media (min-width: 1024px) {
     .main-circle {
         top: 65%;
-       
+        
         width: 15vw;
         height: 15vw;
     }
-    
+
     .expanding-circle {
         top: 65%;
-    
+
         width: 15vw;
         height: 15vw;
     }  
@@ -342,55 +392,6 @@ body {
     }
 }
 
-
-/* 🔸 ESTILOS SECCIONES GENERALES */
-
-.section {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-
-    height: 100vh;
-    max-width: 100vw;
-
-    background-color: var(--color-3);
-    color: var(--color-1);
-
-    padding: 1.5rem 2rem;
-
-    overflow: hidden;
-
-    z-index: 1;
-}
-
-.section-content {
-    font-size: 1.2rem;
-}
-
-@media (min-width: 768px) {
-    .section-content {
-        font-size: 1.5rem;
-    }
-}
-
-@media (min-width: 1024px) {
-    .section {
-        padding: 0 3.8rem;
-    }
-    
-    .section-content {
-        font-size: 2rem;
-    }
-}
-
-#smooth-wrapper {
-    overflow: hidden;
-    height: 100vh;
-  }
-  
-  #smooth-content {
-    will-change: transform;
-  }
 
 /* 🔸 00 - WELCOME SECTION */
 
@@ -611,6 +612,12 @@ body {
         opacity: 1;
     }
 
+}
+/*🔸04 - RECONOCER LOS SÍNTOMAS */
+@media (min-width: 1024px) {
+    .cuatro .section-content {
+        max-width: 80vw;
+    }
 }
 
 /*🔸05 - VIDEO A PANTALLA COMPLETA */
