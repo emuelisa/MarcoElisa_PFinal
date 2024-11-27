@@ -495,7 +495,7 @@ const tl08 = gsap.timeline({
     trigger: bloque08,
     start: "top top",
     end: "bottom top",
-    scrub: 1.5,
+    scrub: true,
     pin: true,
   },
 });
