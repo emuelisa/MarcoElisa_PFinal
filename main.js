@@ -481,10 +481,10 @@ function setCircleValues() {
   // Establecer los valores de posición y tamaño de cada círculo según el dispositivo
   if (device === "mobile") {
     return {
-      circle1: { width: "18vh", height: "18vh", x: "-15vw", y: "-49vh" },
+      circle1: { width: "18vh", height: "18vh", x: "-15vw", y: "-56vh" },
       circle2: { x: "-70vw", y: "-11vh" },
       circle3: { width: "25vh", height: "25vh", x: "-52vw", y: "-35vh" },
-      circle4: { width: "11vh", height: "11vh", x: "-65vw", y: "-45vh" },
+      circle4: { width: "11vh", height: "11vh", x: "-70vw", y: "-55vh" },
     };
   } else {
     return {
