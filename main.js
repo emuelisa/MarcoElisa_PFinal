@@ -468,15 +468,45 @@ tl07
     { opacity: 1, y: 0, duration: 1} 
   );
 
+  // Función para detectar el tamaño de la pantalla
+function getDeviceSize() {
+  const isMobile = window.innerWidth <= 768; // Define el ancho de pantalla para móviles
+  return isMobile ? "mobile" : "desktop"; // Devuelve 'mobile' o 'desktop' según el caso
+}
+
+// Establecer los valores diferentes dependiendo del tamaño de la pantalla
+function setCircleValues() {
+  const device = getDeviceSize();
+
+  // Establecer los valores de posición y tamaño de cada círculo según el dispositivo
+  if (device === "mobile") {
+    return {
+      circle1: { width: "18vh", height: "18vh", x: "-15vw", y: "-49vh" },
+      circle2: { x: "-70vw", y: "-11vh" },
+      circle3: { width: "25vh", height: "25vh", x: "-52vw", y: "-35vh" },
+      circle4: { width: "11vh", height: "11vh", x: "-65vw", y: "-45vh" },
+    };
+  } else {
+    return {
+      circle1: { width: "26vh", height: "26vh", x: "10vw", y: "-45vh" },
+      circle2: { x: "-40vw", y: "5vh" },
+      circle3: { width: "23vh", height: "23vh", x: "-20vw", y: "-20vh" },
+      circle4: { width: "16vh", height: "16vh", x: "-65vw", y: "-10vh" },
+    };
+  }
+}
+
+// Recuperar los valores para los círculos dependiendo de cada dispositivo
+const circleValues = setCircleValues();
+
 //Los círculos se colocan en sus lugares. Algunos cambian también de tamaño
 tl07
-  .to(circles[1], { width: "26vh", height: "26vh", x: "10vw", y: "-45vh", duration: 1 }, "<")
-  .to(circles[2], { x: "-40vw", y: "10vh", duration: 1 }, "<")
-  .to(circles[3], { width: "23vh", height: "23vh", x: "-20vw", y: "-20vh", duration: 1 }, "<")
-  .to(circles[4], { width: "16vh", height: "16vh", x: "-65vw", y: "-20vh", duration: 1 }, "<")
-  .fromTo(tex, { opacity: 0, duration: 1 },{ opacity: 1, duration: 1 }, "<") // Aparece el texto de los círculos
-  .to({}, {duration: 2}); //He añadido una pequeña pausa al terminar proque si no pasaba de sección muy rápido 
-
+  .to(circles[1], { width: circleValues.circle1.width, height: circleValues.circle1.height, x: circleValues.circle1.x, y: circleValues.circle1.y, duration: 1 }, "<")
+  .to(circles[2], { x: circleValues.circle2.x, y: circleValues.circle2.y, duration: 1 }, "<")
+  .to(circles[3], { width: circleValues.circle3.width, height: circleValues.circle3.height, x: circleValues.circle3.x, y: circleValues.circle3.y, duration: 1 }, "<")
+  .to(circles[4], { width: circleValues.circle4.width, height: circleValues.circle4.height, x: circleValues.circle4.x, y: circleValues.circle4.y, duration: 1 }, "<")
+  .fromTo(tex, { opacity: 0, duration: 1 },{ opacity: 1, duration: 1 }, "<")
+  .to({}, {duration: 2}); // Pausa adicional
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 
