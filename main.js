@@ -63,12 +63,12 @@ const sections = [
   { id: "cierre", text: "CIERRE"},
 ];
 
-document.addEventListener("DOMContentLoaded", () => { //Porque si no no funcionaba
+document.addEventListener("DOMContentLoaded", () => { //Si todo el contenido de la página no esta cargado, no funcionará correctamente
   sections.forEach(({ id, text }) => {
     ScrollTrigger.create({
-      trigger: `#${id}`, // Selector de la sección
-      start: "top center", // Inicia cuando el top de la sección está en el centro de la pantalla
-      end: "bottom center", // Termina cuando el bottom de la sección está en el centro
+      trigger: `#${id}`, // Selector por secciones
+      start: "top center",
+      end: "bottom center", 
       onEnter: () => {
         // Animo la opacidad hacia 0 antes de cambiar el texto
         gsap.to(sectionText, {
@@ -167,8 +167,6 @@ tl02
   duration: 2,
   });
 
-
-
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 
 /*🔶 SECCIÓN 03.01 - Animación del carrusel horizontal. Se trata de un carrusel con items. Cuando el usaurio entra en la sección 03, el scroll
@@ -192,8 +190,6 @@ const tl03 = gsap.timeline({
       scrub: 5,
       pin: true,
     },
-
-   
   });
 
   tl03

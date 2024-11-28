@@ -6,7 +6,9 @@ gsap.registerPlugin(SplitText);
 gsap.registerPlugin(ScrambleTextPlugin);
 gsap.registerPlugin(DrawSVGPlugin);
 
-//
+/* ----------------------------------------------------------------------------------------------------------------------------------------- */
+
+//🔶MODAL PARA LA PANTALLA DE BIENVENIDA
 
 // Seleccionamos los elementos del DOM
 const loadingScreen = document.getElementById('loading-screen');
@@ -21,7 +23,9 @@ startButton.addEventListener('click', () => {
     document.body.classList.remove('hidden');
 });
 
-//
+/* ----------------------------------------------------------------------------------------------------------------------------------------- */
+
+//🔶ANIMACIÓN PARA EL BOTÓN DE ACCESO A LA EXPERIENCIA DE SCROLL TELLING
 
 const button = document.querySelector(".scrolltelling-btn");
 
@@ -37,7 +41,9 @@ button.addEventListener("click", (e) => {
   }, 800); 
 });
 
-//
+/* ----------------------------------------------------------------------------------------------------------------------------------------- */
+
+//🔶EXPERIENCIA DE RESPIRACIÓN GUIADA
 
 const instruction = document.querySelector(".instruction h1  ");
 const counter = document.querySelector(".counter");

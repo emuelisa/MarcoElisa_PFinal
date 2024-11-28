@@ -205,7 +205,6 @@ body {
     max-width: 80vw;
 }
 
-
 .loading-content button {
     cursor: pointer;
 
@@ -954,8 +953,8 @@ body.hidden {
     position: absolute;
    
     top: -11%;
+    max-width: 50px;
    
-
     opacity: 0; /* Oculto inicialmente */
     white-space: nowrap; /* Mantiene el texto en una línea */
     
@@ -969,12 +968,12 @@ body.hidden {
 }
 
 .volver-btn p {
-    width: auto;
+    width: 20px;
 }
 
 
 .volver-btn .flecha {
-    display: block;
+    display: none;
     margin: 0;
     font-family: "Segoe UI Symbol", Arial, sans-serif;
 }
@@ -991,4 +990,14 @@ body.hidden {
         transition: all 0.8s ease;
     }
 }
+
+@media (min-width: 1024px) {
+
+    .volver-btn .flecha {
+        display: block;
+        
+    }
+}
+
+
 
