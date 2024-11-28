@@ -35,7 +35,7 @@ let currentPhase = "none"; // Fase actual: 'inspirar', 'mantener', etc.
 let isAnimating = false; // Indica si hay animación en curso
 let breathTimeline = null; // Almacena la timeline actual
 
-// Función para iniciar la inspiración
+//🔶Función para iniciar la fase de INSPIRACIÓN
 function startInspiration() {
 
   isAnimating = true;
@@ -61,97 +61,98 @@ function startInspiration() {
     .to(circles[3], { scale: 2.2, duration: 1, ease: "power2.out" });
 }
 
-// Función para iniciar la fase de Mantener
+//🔶Función para iniciar la fase de MANTENER
+
 function startHoldPhase() {
-    if (currentPhase !== "inspirar") return; // Evitar reiniciar si ya está en animación
-    isAnimating = true;
-    currentPhase = "mantener"; // Cambia a la fase de 'Mantener'
+  if (currentPhase !== "inspirar") return; // Evitar reiniciar si ya está en animación
+  isAnimating = true;
+  currentPhase = "mantener"; // Cambia a la fase de 'Mantener'
 
 
-    instruction.textContent = "Mantén el aire"; // Actualiza el texto de la instrucción
-    
-    currentStep = 0; // Reinicia el contador
-    
-    updateStep(1);
+  instruction.textContent = "Mantén el aire"; // Actualiza el texto de la instrucción
   
-    // Guardar las escalas actuales de los círculos al final de la fase "Inspirar"
-    const finalScales = Array.from(circles).map((circle) =>
-      parseFloat(window.getComputedStyle(circle).transform.match(/matrix\((.+)\)/)[1].split(", ")[0])
-    );
-
-    breathTimeline = gsap.timeline({
+  currentStep = 0; // Reinicia el contador
   
-        onComplete: startExhalePhase,
-    });
+  updateStep(1);
 
-    // Crear una nueva timeline para la fase de Mantener
+  // Guardar las escalas actuales de los círculos al final de la fase "Inspirar"
+  const finalScales = Array.from(circles).map((circle) =>
+    parseFloat(window.getComputedStyle(circle).transform.match(/matrix\((.+)\)/)[1].split(", ")[0])
+  );
 
-    
-    for (let i = 1; i <= 4; i++) {
-        breathTimeline
-          
-          .to(
-            circles,
-            {
-              scale: (index) =>
-                finalScales[index] * (i % 2 === 0 ? 1.05 : 0.95), // Oscilar entre 1.05x y 0.95x
-              duration: 0.5,
-              ease: "sine.inOut",
-            },
-            `+=0.5` // Cada "latido" dura 1 segundo
-          );
-      }
-    
-  }
+  breathTimeline = gsap.timeline({
 
-  function startExhalePhase() {
-    if (currentPhase !== "mantener") return;  
-   
-    isAnimating = true;
-    currentPhase = "exhalar"; // Cambia a la fase de 'Exhalar'
+      onComplete: startExhalePhase,
+  });
 
-    instruction.textContent = "Suelta el aire"; // Actualiza la instrucción
-    toggleAnimation();
-    
-    currentStep = 0; // Reinicia el contador
-
-    updateStep(1);
+  // Crear una nueva timeline para la fase de Mantener
   
-    // Animar la exhalación en 4 pasos
-    breathTimeline = gsap.timeline({
-      onComplete: () => {
-        instruction.textContent = "Mantén por un momento"
-        gsap.delayedCall(4, startInspiration);
-      },
-    });
-    
-    for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= 4; i++) {
       breathTimeline
         .call(() => updateStep(i)) // Actualizar el contador
         .to(
-          circles.slice(4 - i), // Encoger progresivamente los círculos desde el último al primero
+          circles,
           {
-            scale: 1, // Regresa al tamaño inicial
-            duration: 1, // Cada paso dura 1 segundo
-            ease: "power2.inOut",
+            scale: (index) =>
+              finalScales[index] * (i % 2 === 0 ? 1.05 : 0.95), // Oscilar entre 1.05x y 0.95x
+            duration: 0.5,
+            ease: "sine.inOut",
           },
-          `+=0` // Iniciar inmediatamente después del paso previo
+          `+=0.5` // Cada "latido" dura 1 segundo
         );
     }
-   
+}
+  
+function startExhalePhase() {
+  if (currentPhase !== "mantener") return;  
+  
+  isAnimating = true;
+  currentPhase = "exhalar"; // Cambia a la fase de 'Exhalar'
+
+  instruction.textContent = "Suelta el aire"; // Actualiza la instrucción
+  toggleAnimation();
+  
+  currentStep = 0; // Reinicia el contador
+
+  updateStep(1);
+
+  // Animar la exhalación en 4 pasos
+  breathTimeline = gsap.timeline({
+    onComplete: () => {
+      counter.textContent = " "; 
+      instruction.textContent = "Mantén por un momento"
+      
+      gsap.delayedCall(4, startInspiration); //Tras 4 segundos, se reinicia la fase de inspiración
+    },
+  });
+  
+  for (let i = 1; i <= 4; i++) {
+    breathTimeline
+      .call(() => updateStep(i)) // Actualizar el contador
+      .to(
+        circles.slice(4 - i), // Encoger progresivamente los círculos desde el último al primero
+        {
+          scale: 1, // Regresa al tamaño inicial
+          duration: 1, // Cada paso dura 1 segundo
+          ease: "power2.inOut",
+        },
+        `+=0` // Iniciar inmediatamente después del paso previo
+      );
   }
   
-  function resetPhase() {
-    // Resetea todo a su estado inicial
-    currentPhase = "none";
-    instruction.textContent = "Inspira"; // Reinicia la instrucción a "Inspira"
-    updateStep(0); // Reinicia el contador
-    gsap.to(circles, {
-      scale: 1, // Todos los círculos regresan a su escala inicial
-      duration: 0.5,
-      ease: "power2.out",
-    });
-  }      
+}
+  
+function resetPhase() {
+  // Resetea todo a su estado inicial
+  currentPhase = "none";
+  instruction.textContent = "Inspira"; // Reinicia la instrucción a "Inspira"
+  updateStep(0); // Reinicia el contador
+  gsap.to(circles, {
+    scale: 1, // Todos los círculos regresan a su escala inicial
+    duration: 0.5,
+    ease: "power2.out",
+  });
+}      
 
 // Función para resetear la animación
 function resetCircles() {
@@ -177,13 +178,13 @@ function resetCircles() {
     
 }
 
-// Función para actualizar el contador en cada paso
+//🔶Función para actualizar el contador en cada paso
 function updateStep(step) {
   currentStep = step;
   counter.textContent = currentStep; // Muestra el paso actual
 }
 
-// Detectar la barra espaciadora para iniciar o resetear
+//🔶Detectar la barra espaciadora para iniciar o resetear
 
 document.addEventListener("keydown", (e) => {
   if (e.key === " ") {
@@ -199,20 +200,21 @@ document.addEventListener("keyup", (e) => {
   }
 });
 
-// Detectar clic en el círculo principal para iniciar o resetear
+//🔶01. Detectar 'clic' en el círculo principal para iniciar o resetear
+
 mainCircle.addEventListener("mousedown", startInspiration);
 mainCircle.addEventListener("mouseup", resetCircles);
 
 function toggleAnimation() {
     if (isAnimating) {
-      // Usamos GSAP para hacer desaparecer el párrafo
+      //Desaparece el páarrafo por defecto
       gsap.to(hola, {
         opacity: 0,
         duration: 1, // Duración del desvanecimiento
         ease: "power2.out" // Efecto de suavizado
       });
     } else {
-      // Usamos GSAP para hacer aparecer el párrafo
+      //Aparece el párrafo por defecto
       gsap.to(hola, {
         opacity: 1,
         duration: 1, // Duración del desvanecimiento
@@ -221,9 +223,10 @@ function toggleAnimation() {
     }
   }
 
-  // Detectar el clic o el toque en el círculo principal para iniciar o resetear
+//🔶02. Detectar el 'toque' en el círculo principal para iniciar o resetear
+
 const startPress = (e) => {
-  e.preventDefault(); // Evitar la selección de texto en dispositivos móviles
+  e.preventDefault(); // Evitar la selección de texto en dispositivos móviles, si no no deja presionar
   if (isAnimating) return; // Si ya estamos en animación, no hacer nada
   
   startInspiration(); // Inicia la animación de inspiración cuando se presiona
@@ -234,14 +237,15 @@ const endPress = (e) => {
   resetCircles(); // Resetea los círculos y la animación cuando se suelta
 };
 
-// Agregar eventos de inicio y fin de la presión
+//🔸En dispositivos táctiles con mousedown mouseup no funcionaba. Hay que trabajar con touchstart y touchend.
+
 mainCircle.addEventListener("mousedown", startPress); // Para escritorio
 mainCircle.addEventListener("touchstart", startPress); // Para móvil (inicio de la presión)
 
 mainCircle.addEventListener("mouseup", endPress); // Para escritorio
 mainCircle.addEventListener("touchend", endPress); // Para móvil (fin de la presión)
 
-// Opcionalmente, puedes agregar los eventos `touchcancel` y `mouseleave` para mayor control si el usuario desliza fuera del área del div
+//🔸También está guay usar esto (`touchcancel` y `mouseleave`) para mayor control si el usuario desliza fuera del área del div
 mainCircle.addEventListener("mouseleave", endPress); // Si el mouse sale del área
 mainCircle.addEventListener("touchcancel", endPress); // Si el toque se cancela o el dedo se mueve fuera del div
 

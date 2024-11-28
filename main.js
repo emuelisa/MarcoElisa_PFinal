@@ -307,7 +307,9 @@ carouselItems.forEach(item => {
     });
 });
 
-//
+/* ----------------------------------------------------------------------------------------------------------------------------------------- */
+
+/*🔶 SECCIÓN 04 - Cambio de colores del root en la sección 4 (para hacer una especie de darkmode, así la transición entre secciones queda más limpia). También una pequeña animación de los textos para que aparezcan más suavemente. */
 
 
 const bloque04 = document.querySelector(".cuatro");
@@ -408,7 +410,7 @@ const tl06 = gsap.timeline({
   },
 });
 
-//Los círculos crecen uno detrás de otro y tamaños cada vez más grandes
+//Los círculos crecen uno detrás de otro y tamaños cada vez más grandes para simular una inspiración, como los círculos de la experiencia de respiración
 
 tl06
 .to(bcir[0], { 
@@ -489,10 +491,10 @@ function setCircleValues() {
   // Establecer los valores de posición y tamaño de cada círculo según el dispositivo
   if (device === "mobile") {
     return {
-      circle1: { width: "18vh", height: "18vh", x: "2vw", y: "-54vh" },
-      circle2: { x: "-50vw", y: "-3vh" },
-      circle3: { width: "27vh", height: "27vh", x: "-25vw", y: "-28vh" },
-      circle4: { width: "11vh", height: "11vh", x: "-60vw", y: "-47vh" },
+      circle1: { width: "18vh", height: "18vh", x: "-15vw", y: "-56vh" },
+      circle2: { x: "-70vw", y: "-11vh" },
+      circle3: { width: "27vh", height: "27vh", x: "-52vw", y: "-38vh" },
+      circle4: { width: "11vh", height: "11vh", x: "-70vw", y: "-55vh" },
     };
   } else if (device === "tablet") {
     console.log("tablet");
@@ -566,7 +568,7 @@ tl08.to(mensaje, {
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 
-/*🔶 SECCIÓN 09 - TRANSICIÓN DE COLOR. Quería que hibiera una transición entre fondo blanco y fondo verde oscuro. Para que esta transición fuera suave he decidido invertir los colores del root así cambian todos los colores (es similar a una transición de dark mode) */
+/*🔶 SECCIÓN 09 - TRANSICIÓN DE COLOR. Quería que hUbiera una transición entre fondo blanco y fondo verde oscuro. Para que esta transición fuera suave he decidido invertir los colores del root así cambian todos los colores (es similar a una transición de dark mode) */
 
 const bloque09 = document.querySelector(".fin");
 
@@ -614,7 +616,9 @@ const tl09 = gsap.timeline({
     }
 });
 
-///
+/* ----------------------------------------------------------------------------------------------------------------------------------------- */
+
+/*🔶 SECCIÓN FINAL - Animación para el botón de volver a la experiencia de respiración */
 
 const volverBtn = document.querySelector('.volver-btn');
 const emoji = volverBtn.querySelector('.emoji');
