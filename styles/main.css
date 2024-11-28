@@ -973,8 +973,8 @@ body.hidden {
 
 
 .volver-btn .flecha {
-    display: none;
-    margin: 0;
+    color: transparent;
+    margin: 0 12px;
     font-family: "Segoe UI Symbol", Arial, sans-serif;
 }
 
@@ -994,6 +994,7 @@ body.hidden {
 @media (min-width: 1024px) {
 
     .volver-btn .flecha {
+        color: var(--color-3);
         display: block;
         
     }
