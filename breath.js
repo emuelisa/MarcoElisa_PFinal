@@ -8,6 +8,21 @@ gsap.registerPlugin(DrawSVGPlugin);
 
 //
 
+// Seleccionamos los elementos del DOM
+const loadingScreen = document.getElementById('loading-screen');
+const startButton = document.getElementById('start-btn');
+
+// Agregamos un evento al botón para ocultar el modal
+startButton.addEventListener('click', () => {
+    // Oculta el modal con la clase 'hidden'
+    loadingScreen.classList.add('hidden');
+    
+    // Permitir el scroll en el cuerpo de la página
+    document.body.classList.remove('hidden');
+});
+
+//
+
 const button = document.querySelector(".scrolltelling-btn");
 
 button.addEventListener("click", (e) => {
